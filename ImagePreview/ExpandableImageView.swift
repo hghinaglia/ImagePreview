@@ -15,11 +15,11 @@ protocol ExpandableImageViewDelegate: class {
 extension ExpandableImageViewDelegate where Self: UIViewController {
     
     func didTapImageView(_ imageView: ExpandableImageView) {
-        transitionManager.setup(imageView: imageView)
+        TransitionManager.shared.setup(imageView: imageView)
         
         let imageViewerViewController = ImageViewerViewController(image: imageView.image!)
         imageViewerViewController.view.backgroundColor = .black
-        imageViewerViewController.transitioningDelegate = transitionManager
+        imageViewerViewController.transitioningDelegate = TransitionManager.shared
         imageViewerViewController.modalPresentationStyle = .custom
         present(imageViewerViewController, animated: true, completion: nil)
     }

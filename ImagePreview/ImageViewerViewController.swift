@@ -19,9 +19,6 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     init(image: UIImage) {
         self.image = image
         super.init(nibName: nil, bundle: nil)
-        
-        transitioningDelegate = transitionManager
-        modalPresentationStyle = .custom
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,6 +27,9 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        transitioningDelegate = TransitionManager.shared
+        modalPresentationStyle = .custom
         
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false

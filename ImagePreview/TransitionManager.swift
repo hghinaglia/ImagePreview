@@ -10,6 +10,8 @@ import UIKit
 
 class TransitionManager: NSObject {
     
+    static let shared = TransitionManager()
+    
     enum TransitionType {
         case unwinding
         case presenting

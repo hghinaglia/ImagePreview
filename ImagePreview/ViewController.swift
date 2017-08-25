@@ -8,8 +8,6 @@
 
 import UIKit
 
-let transitionManager = TransitionManager()
-
 class ViewController: UIViewController, ExpandableImageViewDelegate {
 
     @IBOutlet weak var imageView1: ExpandableImageView!
