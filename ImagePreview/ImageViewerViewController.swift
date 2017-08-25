@@ -47,8 +47,12 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.0
         imageView.scaledRect(finalRect: view.frame)
+        imageView.isUserInteractionEnabled = true
         scrollView.addSubview(imageView)
         self.imageView = imageView
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler(_:)))
+        imageView.addGestureRecognizer(panGesture)
         
         let closeButton = UIButton(type: .system)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +73,18 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Actions
     
     func close() {
+        TransitionManager.shared.dismissRect = imageView.frame
         dismiss(animated: true, completion: nil)
+    }
+    
+    func centerImageView(animated: Bool) {
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                self.imageView.frame = self.centeredFrameFor(scrollView: self.scrollView, view: self.imageView)
+            }
+        } else {
+            imageView.frame = centeredFrameFor(scrollView: scrollView, view: imageView)
+        }        
     }
     
     func toggleZoom() {
@@ -80,6 +95,22 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
+        
+        let translation = sender.translation(in: view)
+        if let myView = sender.view {
+            myView.center = CGPoint(x: myView.center.x + translation.x, y: myView.center.y + translation.y)
+        }
+        sender.setTranslation(.zero, in: view)
+        
+        let velocity = sender.velocity(in: view)
+        if velocity.y > 2000 || velocity.y < -2000 || velocity.x > 2000 || velocity.x < -2000 {
+            close()
+        } else if sender.state == .ended {
+            centerImageView(animated: true)
+        }
+        
+    }
     // MARK: - Layouts
     
     func prepareConstraints() {
@@ -121,7 +152,7 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        imageView.frame = centeredFrameFor(scrollView: scrollView, view: imageView)
+        centerImageView(animated: false)
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

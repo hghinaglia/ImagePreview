@@ -22,6 +22,8 @@ class TransitionManager: NSObject {
     fileprivate var originalImageView: UIImageView!
     fileprivate var duplicatedImageView: UIImageView!
     
+    var dismissRect: CGRect?
+    
     func setup(imageView: UIImageView) {
         originalImageView = imageView
         
@@ -69,7 +71,8 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
         case.unwinding:
             
             let fromView = fromController!.view!
-            fromView.alpha = 1.0
+            
+            self.duplicatedImageView.frame = dismissRect ?? self.duplicatedImageView.frame
             self.duplicatedImageView.alpha = 1.0
             containerView.addSubview(fromView)
             UIView.animate(withDuration: duration, animations:  {
