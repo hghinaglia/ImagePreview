@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,29 +21,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="pzL-5J-I2K">
-                                <rect key="frame" x="37.5" y="67" width="300" height="533"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img3" translatesAutoresizingMaskIntoConstraints="NO" id="GvY-WP-hny" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                <rect key="frame" x="37" y="463" width="300" height="157.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEQ-lH-3j5">
+                                <rect key="frame" x="87.5" y="70" width="200" height="120"/>
                                 <subviews>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="157.5"/>
-                                    </imageView>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="789-7F-VHu" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="187.5" width="300" height="158"/>
-                                    </imageView>
-                                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img3" translatesAutoresizingMaskIntoConstraints="NO" id="GvY-WP-hny" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="375.5" width="300" height="157.5"/>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                        <rect key="frame" x="-0.5" y="0.0" width="200" height="120"/>
                                     </imageView>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="pzL-5J-I2K" secondAttribute="height" multiplier="9:16" id="0ts-5K-2aH"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="height" secondItem="pEQ-lH-3j5" secondAttribute="height" id="KNb-ri-Odl"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerY" secondItem="pEQ-lH-3j5" secondAttribute="centerY" id="Q0a-wi-cRb"/>
+                                    <constraint firstAttribute="width" constant="200" id="UGy-Vs-suT"/>
+                                    <constraint firstAttribute="height" constant="120" id="Z0m-RL-uDZ"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerX" secondItem="pEQ-lH-3j5" secondAttribute="centerX" id="iZV-iC-oWO"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="width" secondItem="pEQ-lH-3j5" secondAttribute="width" id="kim-Ry-wf7"/>
                                 </constraints>
-                            </stackView>
+                            </view>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="789-7F-VHu" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                <rect key="frame" x="37" y="238" width="300" height="146"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pzL-5J-I2K" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IEN-3U-p8M"/>
-                            <constraint firstItem="pzL-5J-I2K" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.8" id="Uyc-ta-4bw"/>
-                            <constraint firstItem="pzL-5J-I2K" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sxs-uA-8N7"/>
+                            <constraint firstItem="pEQ-lH-3j5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="37o-4S-k8J"/>
+                            <constraint firstItem="pEQ-lH-3j5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="5CX-9p-kt6"/>
                         </constraints>
                     </view>
                     <connections>

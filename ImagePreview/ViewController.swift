@@ -14,8 +14,6 @@ class ViewController: UIViewController, ExpandableImageViewDelegate {
     @IBOutlet weak var imageView2: ExpandableImageView!
     @IBOutlet weak var imageView3: ExpandableImageView!
     
-    var isPresenting = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView1.delegate = self
@@ -23,15 +21,14 @@ class ViewController: UIViewController, ExpandableImageViewDelegate {
         imageView3.delegate = self        
     }
     
-    func didTapImageView(_ imageView: ExpandableImageView) {
-        let transitionManager = TransitionManager(absoluteRect: imageView.convert(imageView.bounds, to: view),
-                                                  image: imageView.image!)
-        
-        let expandablevc = DetailsViewController(image: imageView.image!)
-        expandablevc.view.backgroundColor = .black
-        expandablevc.transitioningDelegate = transitionManager
-        expandablevc.modalPresentationStyle = .custom
-        show(expandablevc, sender: nil)
+    func didTapImageView(_ imageView: ExpandableImageView) {                
+        transitionManager.setup(originalImageView: imageView, absoluteRect: imageView.convert(imageView.bounds, to: view))
+                        
+        let detailsViewController = DetailsViewController(image: imageView.image!)
+        detailsViewController.view.backgroundColor = .black
+        detailsViewController.transitioningDelegate = transitionManager
+        detailsViewController.modalPresentationStyle = .custom
+        present(detailsViewController, animated: true, completion: nil)
     }
     
 }
