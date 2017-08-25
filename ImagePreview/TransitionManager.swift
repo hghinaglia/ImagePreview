@@ -20,13 +20,20 @@ class TransitionManager: NSObject {
     fileprivate var originalImageView: UIImageView!
     fileprivate var duplicatedImageView: UIImageView!
     
-    func setup(originalImageView: UIImageView, absoluteRect: CGRect) {
-        self.absoluteRect = absoluteRect
-        self.originalImageView = originalImageView
+    func setup(imageView: UIImageView) {
+        originalImageView = imageView
         
-        duplicatedImageView = UIImageView(frame: absoluteRect)
-        duplicatedImageView.contentMode = .scaleToFill
-        duplicatedImageView.image = originalImageView.image!
+        // Absolute rect base on screen
+        absoluteRect = imageView.convert(
+            imageView.bounds,
+            to: UIApplication.shared.keyWindow!.rootViewController!.view!)
+        
+        // Copy Image View
+        duplicatedImageView = UIImageView(image: originalImageView.image!)
+        duplicatedImageView.frame = absoluteRect
+        duplicatedImageView.contentMode = originalImageView.contentMode
+        duplicatedImageView.layer.masksToBounds = originalImageView.layer.masksToBounds
+        duplicatedImageView.layer.cornerRadius = originalImageView.layer.cornerRadius
     }
     
 }
@@ -48,6 +55,7 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
             containerView.addSubview(duplicatedImageView)
             toView.alpha = 0.0
             self.originalImageView.alpha = 0.0
+            
             UIView.animate(withDuration: duration, animations:  {                
                 self.duplicatedImageView.scaledRect(finalRect: finalFrame)
                 toView.alpha = 1
@@ -75,27 +83,6 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.3
-    }
-    
-}
-
-extension UIView {
-    
-    func scaledRect(finalRect: CGRect) {
-        let isHorizontal: Bool = frame.width >= frame.height
-        
-        if isHorizontal {
-            let newHeight = (finalRect.width / frame.width) * frame.height
-            let newSize = CGSize(width: finalRect.width, height: newHeight)
-            let newOrigin = CGPoint(x: 0, y: (finalRect.height - newSize.height) / 2.0)
-            frame = CGRect(origin: newOrigin, size: newSize)
-            print("frame: \(frame)")
-        } else {
-            let newWidth = (frame.width * finalRect.height) / frame.height
-            let newSize = CGSize(width: newWidth, height: finalRect.height)
-            let newOrigin = CGPoint(x: (finalRect.width - newSize.width) / 2.0, y: 0)
-            frame = CGRect(origin: newOrigin, size: newSize)
-        }
     }
     
 }

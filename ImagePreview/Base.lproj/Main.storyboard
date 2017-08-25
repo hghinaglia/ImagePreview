@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,51 +23,84 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img3" translatesAutoresizingMaskIntoConstraints="NO" id="GvY-WP-hny" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                <rect key="frame" x="37" y="463" width="300" height="157.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEQ-lH-3j5">
-                                <rect key="frame" x="87.5" y="70" width="200" height="120"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1F-j9-7U3">
+                                <rect key="frame" x="112.5" y="25" width="150" height="150"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                        <rect key="frame" x="-0.5" y="0.0" width="200" height="120"/>
+                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img4" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="height" secondItem="pEQ-lH-3j5" secondAttribute="height" id="KNb-ri-Odl"/>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerY" secondItem="pEQ-lH-3j5" secondAttribute="centerY" id="Q0a-wi-cRb"/>
-                                    <constraint firstAttribute="width" constant="200" id="UGy-Vs-suT"/>
-                                    <constraint firstAttribute="height" constant="120" id="Z0m-RL-uDZ"/>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerX" secondItem="pEQ-lH-3j5" secondAttribute="centerX" id="iZV-iC-oWO"/>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="width" secondItem="pEQ-lH-3j5" secondAttribute="width" id="kim-Ry-wf7"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="width" secondItem="y1F-j9-7U3" secondAttribute="width" id="09d-if-oZJ"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerY" secondItem="y1F-j9-7U3" secondAttribute="centerY" id="QB8-jF-HEg"/>
+                                    <constraint firstAttribute="width" constant="150" id="XLt-N8-DFb"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="height" secondItem="y1F-j9-7U3" secondAttribute="height" id="agk-SU-SRF"/>
+                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerX" secondItem="y1F-j9-7U3" secondAttribute="centerX" id="avJ-JP-Eek"/>
+                                    <constraint firstAttribute="height" constant="150" id="g4A-Gr-uHG"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="75"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="789-7F-VHu" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                <rect key="frame" x="37" y="238" width="300" height="146"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzV-gX-V2Z">
+                                <rect key="frame" x="112" y="258.5" width="150" height="150"/>
+                                <subviews>
+                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-xt-nde" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="W0U-xt-nde" firstAttribute="centerX" secondItem="hzV-gX-V2Z" secondAttribute="centerX" id="4J1-4R-cWG"/>
+                                    <constraint firstAttribute="width" constant="150" id="Ggh-LY-sye"/>
+                                    <constraint firstItem="W0U-xt-nde" firstAttribute="centerY" secondItem="hzV-gX-V2Z" secondAttribute="centerY" id="T9T-Qq-LRr"/>
+                                    <constraint firstItem="W0U-xt-nde" firstAttribute="width" secondItem="hzV-gX-V2Z" secondAttribute="width" id="VfN-0C-cAU"/>
+                                    <constraint firstAttribute="height" constant="150" id="gJD-dv-LqA"/>
+                                    <constraint firstItem="W0U-xt-nde" firstAttribute="height" secondItem="hzV-gX-V2Z" secondAttribute="height" id="kuj-aa-51K"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="75"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="BX8-P9-SMU" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                <rect key="frame" x="-0.5" y="474.5" width="375" height="185"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="BX8-P9-SMU" secondAttribute="height" multiplier="75:37" id="Oc9-QZ-oMs"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pEQ-lH-3j5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="37o-4S-k8J"/>
-                            <constraint firstItem="pEQ-lH-3j5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="5CX-9p-kt6"/>
+                            <constraint firstItem="hzV-gX-V2Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="F0s-p0-MM9"/>
+                            <constraint firstItem="hzV-gX-V2Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WqI-aA-laV"/>
+                            <constraint firstItem="y1F-j9-7U3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.3" id="Y2d-id-zkg"/>
+                            <constraint firstItem="y1F-j9-7U3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y4X-LE-0p6"/>
+                            <constraint firstItem="BX8-P9-SMU" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="j4f-Rc-3lx"/>
+                            <constraint firstItem="BX8-P9-SMU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nbF-1g-AD3"/>
+                            <constraint firstItem="BX8-P9-SMU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.7" id="qtI-BN-z9z"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView1" destination="uqO-Jr-V2W" id="OGp-Gp-lSd"/>
-                        <outlet property="imageView2" destination="789-7F-VHu" id="HkC-zR-4bW"/>
-                        <outlet property="imageView3" destination="GvY-WP-hny" id="AzR-TQ-E2O"/>
+                        <outlet property="imageView2" destination="W0U-xt-nde" id="WKU-oh-DtR"/>
+                        <outlet property="imageView3" destination="BX8-P9-SMU" id="UdZ-vD-Pie"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="106.59670164917542"/>
         </scene>
     </scenes>
     <resources>
         <image name="img1" width="600" height="296"/>
         <image name="img2" width="800" height="392"/>
-        <image name="img3" width="800" height="392"/>
+        <image name="img4" width="639" height="960"/>
     </resources>
 </document>

@@ -1,5 +1,5 @@
 //
-//  DetailsViewController.swift
+//  ImageViewerViewController.swift
 //  ImagePreview
 //
 //  Created by Hector Ghinaglia on 8/24/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsViewController: UIViewController, UIScrollViewDelegate {
+class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
 
     weak var imageView: UIImageView!
     weak var scrollView: UIScrollView!
@@ -34,13 +34,17 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
-        scrollView.maximumZoomScale = 1.8
+        scrollView.maximumZoomScale = 2.0
         scrollView.minimumZoomScale = 1.0
         view.addSubview(scrollView)
         self.scrollView = scrollView
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleZoom))
+        tapGesture.numberOfTapsRequired = 2
+        scrollView.addGestureRecognizer(tapGesture)
+        
         let imageView = UIImageView(image: image)
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
         imageView.alpha = 0.0
         imageView.scaledRect(finalRect: view.frame)
         scrollView.addSubview(imageView)
@@ -62,16 +66,18 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         self.imageView.alpha = 1.0
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()        
-        scrollView.contentSize = imageView.frame.size
-        
-    }
-    
     // MARK: - Actions
     
     func close() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func toggleZoom() {
+        if scrollView.zoomScale > scrollView.minimumZoomScale {
+            scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
+        } else {
+            scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
+        }
     }
     
     // MARK: - Layouts

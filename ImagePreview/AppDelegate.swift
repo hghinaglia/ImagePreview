@@ -8,8 +8,6 @@
 
 import UIKit
 
-let transitionManager = TransitionManager()
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
