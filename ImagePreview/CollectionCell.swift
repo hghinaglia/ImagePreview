@@ -8,24 +8,12 @@
 
 import UIKit
 
-
 class CollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var iconImageView: ExpandableImageView!
-    weak var presenter: UIViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        iconImageView.delegate = self
-    }
-    
-}
-
-extension CollectionCell: ExpandableImageViewDelegate {
-    
-    func didTapImageView(_ imageView: ExpandableImageView) {
-        TransitionManager.shared.presenter = presenter
-        TransitionManager.shared.performTransition(with: imageView)
     }
     
 }

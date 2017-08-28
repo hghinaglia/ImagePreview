@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewController: UIViewController {
+class CollectionViewController: UIViewController, ExpandableImageViewDelegate {
 
     let images: [UIImage] = [#imageLiteral(resourceName: "img1"), #imageLiteral(resourceName: "img2"), #imageLiteral(resourceName: "img3"), #imageLiteral(resourceName: "img4")]
     
@@ -30,8 +30,8 @@ extension CollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let identifier = String(describing: CollectionCell.self)
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CollectionCell
-        cell.iconImageView.image = images[indexPath.row]
-        cell.presenter = self
+        cell.iconImageView.delegate = self
+        cell.iconImageView.image = images[indexPath.row]        
         return cell
     }
     

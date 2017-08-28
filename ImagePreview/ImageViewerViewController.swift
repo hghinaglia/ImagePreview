@@ -31,9 +31,6 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        transitioningDelegate = TransitionManager.shared
-        modalPresentationStyle = .custom
-        
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.delegate = self
@@ -42,7 +39,7 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
         self.scrollView = scrollView
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleZoom))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(toggleZoom(_:)))
         tapGesture.numberOfTapsRequired = 2
         scrollView.addGestureRecognizer(tapGesture)
         
@@ -98,7 +95,7 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    func toggleZoom() {
+    func toggleZoom(_ sender: UITapGestureRecognizer) {
         if scrollView.zoomScale > scrollView.minimumZoomScale {
             scrollView.setZoomScale(scrollView.minimumZoomScale, animated: true)
         } else {

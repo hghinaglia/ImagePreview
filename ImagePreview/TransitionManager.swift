@@ -22,11 +22,9 @@ class TransitionManager: NSObject {
     fileprivate var fromImageView: UIImageView!
     fileprivate var duplicatedImageView: UIImageView!
     var toImageView: UIImageView?
-    var presenter: UIViewController?
     
-    func performTransition(with imageView: UIImageView) {
+    func performTransition(with imageView: UIImageView, presenter: UIViewController) {
         guard let image = imageView.image else { return }
-        guard let presenter = presenter else { return }
         
         // Source image view
         fromImageView = imageView
@@ -56,18 +54,16 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let duration = transitionDuration(using: transitionContext)
-        let fromController = transitionContext.viewController(forKey: .from)
-        let toController = transitionContext.viewController(forKey: .to)
-        let finalFrame = transitionContext.finalFrame(for: toController!)
         let containerView = transitionContext.containerView
         
         switch type {
         case .presenting:
+            guard let toController = transitionContext.viewController(forKey: .to) else { return }
+            let finalFrame = transitionContext.finalFrame(for: toController)
             
-            let toView = toController!.view!
-            containerView.addSubview(toView)
+            containerView.addSubview(toController.view)
             containerView.addSubview(duplicatedImageView)
-            toView.alpha = 0.0
+            toController.view.alpha = 0.0
             fromImageView.alpha = 0.0
             
             if duplicatedImageView.layer.cornerRadius > 0.0 {
@@ -81,22 +77,21 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
             
             UIView.animate(withDuration: duration, animations:  {
                 self.duplicatedImageView.scaledRect(finalRect: finalFrame)                
-                toView.alpha = 1
+                toController.view.alpha = 1
             }, completion: { finished in
                 self.duplicatedImageView.alpha = 0.0
                 transitionContext.completeTransition(finished)
             })
             
         case.unwinding:
-            
-            let fromView = fromController!.view!
+            guard let fromController = transitionContext.viewController(forKey: .from) else { return }
             duplicatedImageView.frame = toImageView?.frame ?? duplicatedImageView.frame
             duplicatedImageView.alpha = 1.0
             toImageView?.alpha = 0.0
-            containerView.insertSubview(fromView, belowSubview: duplicatedImageView)
+            containerView.insertSubview(fromController.view, belowSubview: duplicatedImageView)
             UIView.animate(withDuration: duration, animations:  {
                 self.duplicatedImageView.frame = self.absoluteRect
-                fromView.alpha = 0.0
+                fromController.view.alpha = 0.0
             }, completion: { finished in
                 self.fromImageView.alpha = 1.0
                 self.duplicatedImageView.removeFromSuperview()

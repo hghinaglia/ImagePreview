@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ExpandableImageViewDelegate {
 
     @IBOutlet weak var imageView1: ExpandableImageView!
     @IBOutlet weak var imageView2: ExpandableImageView!
@@ -20,15 +20,6 @@ class ViewController: UIViewController {
         imageView1.delegate = self
         imageView2.delegate = self
         imageView3.delegate = self
-    }
-    
-}
-
-extension ViewController: ExpandableImageViewDelegate {
-    
-    func didTapImageView(_ imageView: ExpandableImageView) {
-        TransitionManager.shared.presenter = self
-        TransitionManager.shared.performTransition(with: imageView)
     }
     
 }
