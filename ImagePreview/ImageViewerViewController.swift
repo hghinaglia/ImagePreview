@@ -10,14 +10,14 @@ import UIKit
 
 class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
 
-    weak var imageView: UIImageView!
-    weak var scrollView: UIScrollView!
-    weak var closeButton: UIButton!
+    private weak var imageView: UIImageView!
+    private weak var scrollView: UIScrollView!
+    private weak var closeButton: UIButton!
     
     private var preferredVelocityCheck: CGFloat = 1600.0
     
     var image: UIImage
-    var shouldClose = false
+    private var shouldClose = false
     
     init(image: UIImage) {
         self.image = image
@@ -54,7 +54,7 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         scrollView.addSubview(imageView)
         self.imageView = imageView
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureRecognizerHandler(_:)))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(drag(_:)))
         imageView.addGestureRecognizer(panGesture)
         
         let closeButton = UIButton(type: .system)
@@ -72,22 +72,30 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidAppear(animated)
         self.imageView.alpha = 1.0
     }
+        
+    // MARK: - Layouts
+    
+    fileprivate func prepareConstraints() {
+        
+        let views: [String: Any] = [
+            "scrollView": scrollView,
+            "closeButton": closeButton
+        ]
+        
+        let scrollViewHorizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: views)
+        let scrollViewVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: views)
+        view.addConstraints(scrollViewHorizontalConstraints + scrollViewVerticalConstraints)
+        
+        let closeButtonHorizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[closeButton]-|", options: [], metrics: nil, views: views)
+        let closeButtonVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(20)-[closeButton]", options: [], metrics: nil, views: views)
+        view.addConstraints(closeButtonHorizontalConstraints + closeButtonVerticalConstraints)
+    }
     
     // MARK: - Actions
     
     func close() {
         TransitionManager.shared.toImageView = imageView
         dismiss(animated: true, completion: nil)
-    }
-    
-    func centerImageView(animated: Bool) {
-        if animated {
-            UIView.animate(withDuration: 0.3) {
-                self.imageView.frame = self.centeredFrameFor(scrollView: self.scrollView, view: self.imageView)
-            }
-        } else {
-            imageView.frame = centeredFrameFor(scrollView: scrollView, view: imageView)
-        }        
     }
     
     func toggleZoom() {
@@ -98,7 +106,7 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
+    func drag(_ sender: UIPanGestureRecognizer) {
         switch sender.state {
         case .began:
             shouldClose = false
@@ -129,27 +137,20 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         }
         
     }
-    // MARK: - Layouts
-    
-    func prepareConstraints() {
-        
-        let views: [String: Any] = [
-            "scrollView": scrollView,
-            "closeButton": closeButton
-        ]
-        
-        let scrollViewHorizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: views)
-        let scrollViewVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: views)
-        view.addConstraints(scrollViewHorizontalConstraints + scrollViewVerticalConstraints)
-        
-        let closeButtonHorizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[closeButton]-|", options: [], metrics: nil, views: views)
-        let closeButtonVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(20)-[closeButton]", options: [], metrics: nil, views: views)
-        view.addConstraints(closeButtonHorizontalConstraints + closeButtonVerticalConstraints)
-    }
     
     // MARK: - Helper
     
-    func centeredFrameFor(scrollView: UIScrollView, view: UIView) -> CGRect {
+    fileprivate func centerImageView(animated: Bool) {
+        if animated {
+            UIView.animate(withDuration: 0.3) {
+                self.imageView.frame = self.centeredFrameFor(scrollView: self.scrollView, view: self.imageView)
+            }
+        } else {
+            imageView.frame = centeredFrameFor(scrollView: scrollView, view: imageView)
+        }
+    }
+    
+    fileprivate func centeredFrameFor(scrollView: UIScrollView, view: UIView) -> CGRect {
         let boundsSize = scrollView.bounds.size
         var frameToCenter = view.frame
         

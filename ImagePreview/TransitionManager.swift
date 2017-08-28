@@ -58,14 +58,16 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
             containerView.addSubview(toView)
             containerView.addSubview(duplicatedImageView)
             toView.alpha = 0.0
-            self.fromImageView.alpha = 0.0
+            fromImageView.alpha = 0.0
             
-            let animation = CABasicAnimation(keyPath: "cornerRadius")
-            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-            animation.fromValue = duplicatedImageView.layer.cornerRadius
-            animation.toValue = 0.0
-            animation.duration = duration * 1.15
-            self.duplicatedImageView.layer.add(animation, forKey: "cornerRadius")
+            if duplicatedImageView.layer.cornerRadius > 0.0 {
+                let animation = CABasicAnimation(keyPath: "cornerRadius")
+                animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+                animation.fromValue = duplicatedImageView.layer.cornerRadius
+                animation.toValue = 0.0
+                animation.duration = duration * 1.15
+                duplicatedImageView.layer.add(animation, forKey: "cornerRadius")
+            }
             
             UIView.animate(withDuration: duration, animations:  {
                 self.duplicatedImageView.scaledRect(finalRect: finalFrame)                
