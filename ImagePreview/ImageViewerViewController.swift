@@ -14,7 +14,10 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     weak var scrollView: UIScrollView!
     weak var closeButton: UIButton!
     
+    private var preferredVelocityCheck: CGFloat = 1600.0
+    
     var image: UIImage
+    var shouldClose = false
     
     init(image: UIImage) {
         self.image = image
@@ -73,7 +76,7 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Actions
     
     func close() {
-        TransitionManager.shared.dismissRect = imageView.frame
+        TransitionManager.shared.toImageView = imageView
         dismiss(animated: true, completion: nil)
     }
     
@@ -96,18 +99,33 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func panGestureRecognizerHandler(_ sender: UIPanGestureRecognizer) {
-        
-        let translation = sender.translation(in: view)
-        if let myView = sender.view {
-            myView.center = CGPoint(x: myView.center.x + translation.x, y: myView.center.y + translation.y)
-        }
-        sender.setTranslation(.zero, in: view)
-        
-        let velocity = sender.velocity(in: view)
-        if velocity.y > 2000 || velocity.y < -2000 || velocity.x > 2000 || velocity.x < -2000 {
-            close()
-        } else if sender.state == .ended {
+        switch sender.state {
+        case .began:
+            shouldClose = false
+        case .changed:
+            let translation = sender.translation(in: view)
+            if let imageView = sender.view {
+                imageView.center = CGPoint(x: imageView.center.x + translation.x,
+                                           y: imageView.center.y + translation.y)
+            }
+            sender.setTranslation(.zero, in: view)
+            let velocity = sender.velocity(in: view)
+            if velocity.y > preferredVelocityCheck || velocity.y < -preferredVelocityCheck ||
+                velocity.x > preferredVelocityCheck || velocity.x < -preferredVelocityCheck {
+                shouldClose = true
+            }
+        case.cancelled:
+            shouldClose = false
             centerImageView(animated: true)
+        case .ended:
+            if shouldClose {
+                close()
+            } else {
+                shouldClose = false
+                centerImageView(animated: true)
+            }
+        default:
+            break
         }
         
     }
@@ -152,7 +170,11 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - UIScrollViewDelegate
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        centerImageView(animated: false)
+        if scrollView.zoomScale < scrollView.minimumZoomScale * 0.6 {
+            close()
+        } else {
+            centerImageView(animated: false)
+        }
     }
     
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

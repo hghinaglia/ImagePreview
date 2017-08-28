@@ -19,13 +19,12 @@ class TransitionManager: NSObject {
     
     fileprivate var type: TransitionType = .presenting
     fileprivate var absoluteRect: CGRect!
-    fileprivate var originalImageView: UIImageView!
+    fileprivate var fromImageView: UIImageView!
     fileprivate var duplicatedImageView: UIImageView!
-    
-    var dismissRect: CGRect?
+    var toImageView: UIImageView?
     
     func setup(imageView: UIImageView) {
-        originalImageView = imageView
+        fromImageView = imageView
         
         // Absolute rect base on screen
         absoluteRect = imageView.convert(
@@ -33,11 +32,12 @@ class TransitionManager: NSObject {
             to: UIApplication.shared.keyWindow!.rootViewController!.view!)
         
         // Copy Image View
-        duplicatedImageView = UIImageView(image: originalImageView.image!)
+        duplicatedImageView = UIImageView(image: fromImageView.image!)
         duplicatedImageView.frame = absoluteRect
-        duplicatedImageView.contentMode = originalImageView.contentMode
-        duplicatedImageView.layer.masksToBounds = originalImageView.layer.masksToBounds
-        duplicatedImageView.layer.cornerRadius = originalImageView.layer.cornerRadius
+        duplicatedImageView.contentMode = fromImageView.contentMode
+        duplicatedImageView.layer.masksToBounds = fromImageView.layer.masksToBounds
+        duplicatedImageView.layer.cornerRadius = fromImageView.layer.cornerRadius
+        duplicatedImageView.clipsToBounds = fromImageView.clipsToBounds
     }
     
 }
@@ -58,10 +58,17 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
             containerView.addSubview(toView)
             containerView.addSubview(duplicatedImageView)
             toView.alpha = 0.0
-            self.originalImageView.alpha = 0.0
+            self.fromImageView.alpha = 0.0
             
-            UIView.animate(withDuration: duration, animations:  {                
-                self.duplicatedImageView.scaledRect(finalRect: finalFrame)
+            let animation = CABasicAnimation(keyPath: "cornerRadius")
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            animation.fromValue = duplicatedImageView.layer.cornerRadius
+            animation.toValue = 0.0
+            animation.duration = duration * 1.15
+            self.duplicatedImageView.layer.add(animation, forKey: "cornerRadius")
+            
+            UIView.animate(withDuration: duration, animations:  {
+                self.duplicatedImageView.scaledRect(finalRect: finalFrame)                
                 toView.alpha = 1
             }, completion: { finished in
                 self.duplicatedImageView.alpha = 0.0
@@ -71,15 +78,15 @@ extension TransitionManager: UIViewControllerAnimatedTransitioning {
         case.unwinding:
             
             let fromView = fromController!.view!
-            
-            self.duplicatedImageView.frame = dismissRect ?? self.duplicatedImageView.frame
-            self.duplicatedImageView.alpha = 1.0
-            containerView.addSubview(fromView)
+            duplicatedImageView.frame = toImageView?.frame ?? duplicatedImageView.frame
+            duplicatedImageView.alpha = 1.0
+            toImageView?.alpha = 0.0
+            containerView.insertSubview(fromView, belowSubview: duplicatedImageView)
             UIView.animate(withDuration: duration, animations:  {
                 self.duplicatedImageView.frame = self.absoluteRect
                 fromView.alpha = 0.0
             }, completion: { finished in
-                self.originalImageView.alpha = 1.0
+                self.fromImageView.alpha = 1.0
                 self.duplicatedImageView.removeFromSuperview()
                 transitionContext.completeTransition(finished)
             })

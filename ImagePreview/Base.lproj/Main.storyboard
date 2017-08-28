@@ -23,21 +23,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1F-j9-7U3">
-                                <rect key="frame" x="112.5" y="25" width="150" height="150"/>
-                                <subviews>
-                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img4" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img4" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                <rect key="frame" x="112.5" y="41.5" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="width" secondItem="y1F-j9-7U3" secondAttribute="width" id="09d-if-oZJ"/>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerY" secondItem="y1F-j9-7U3" secondAttribute="centerY" id="QB8-jF-HEg"/>
-                                    <constraint firstAttribute="width" constant="150" id="XLt-N8-DFb"/>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="height" secondItem="y1F-j9-7U3" secondAttribute="height" id="agk-SU-SRF"/>
-                                    <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerX" secondItem="y1F-j9-7U3" secondAttribute="centerX" id="avJ-JP-Eek"/>
-                                    <constraint firstAttribute="height" constant="150" id="g4A-Gr-uHG"/>
+                                    <constraint firstAttribute="width" secondItem="uqO-Jr-V2W" secondAttribute="height" multiplier="1:1" id="cez-SV-pI2"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -45,30 +34,19 @@
                                         <integer key="value" value="75"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzV-gX-V2Z">
-                                <rect key="frame" x="112" y="258.5" width="150" height="150"/>
-                                <subviews>
-                                    <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-xt-nde" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                    </imageView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-xt-nde" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                <rect key="frame" x="112" y="258" width="150" height="150"/>
                                 <constraints>
-                                    <constraint firstItem="W0U-xt-nde" firstAttribute="centerX" secondItem="hzV-gX-V2Z" secondAttribute="centerX" id="4J1-4R-cWG"/>
-                                    <constraint firstAttribute="width" constant="150" id="Ggh-LY-sye"/>
-                                    <constraint firstItem="W0U-xt-nde" firstAttribute="centerY" secondItem="hzV-gX-V2Z" secondAttribute="centerY" id="T9T-Qq-LRr"/>
-                                    <constraint firstItem="W0U-xt-nde" firstAttribute="width" secondItem="hzV-gX-V2Z" secondAttribute="width" id="VfN-0C-cAU"/>
-                                    <constraint firstAttribute="height" constant="150" id="gJD-dv-LqA"/>
-                                    <constraint firstItem="W0U-xt-nde" firstAttribute="height" secondItem="hzV-gX-V2Z" secondAttribute="height" id="kuj-aa-51K"/>
+                                    <constraint firstAttribute="width" secondItem="W0U-xt-nde" secondAttribute="height" multiplier="1:1" id="p9O-rA-xJT"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="75"/>
+                                        <integer key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                            </view>
+                            </imageView>
                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="BX8-P9-SMU" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
                                 <rect key="frame" x="-0.5" y="474.5" width="375" height="185"/>
                                 <constraints>
@@ -78,13 +56,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="hzV-gX-V2Z" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="F0s-p0-MM9"/>
-                            <constraint firstItem="hzV-gX-V2Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WqI-aA-laV"/>
-                            <constraint firstItem="y1F-j9-7U3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.3" id="Y2d-id-zkg"/>
-                            <constraint firstItem="y1F-j9-7U3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Y4X-LE-0p6"/>
+                            <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4bA-hH-Rtr"/>
+                            <constraint firstItem="uqO-Jr-V2W" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="UJv-9l-Mxz"/>
+                            <constraint firstItem="W0U-xt-nde" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YOd-sS-ala"/>
+                            <constraint firstItem="uqO-Jr-V2W" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.35" id="ab1-W5-pDf"/>
+                            <constraint firstItem="W0U-xt-nde" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="gB3-j5-cgw"/>
                             <constraint firstItem="BX8-P9-SMU" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="j4f-Rc-3lx"/>
                             <constraint firstItem="BX8-P9-SMU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nbF-1g-AD3"/>
                             <constraint firstItem="BX8-P9-SMU" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.7" id="qtI-BN-z9z"/>
+                            <constraint firstItem="W0U-xt-nde" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vPk-zR-nCn"/>
                         </constraints>
                     </view>
                     <connections>

@@ -12,20 +12,6 @@ protocol ExpandableImageViewDelegate: class {
     func didTapImageView(_ imageView: ExpandableImageView)
 }
 
-extension ExpandableImageViewDelegate where Self: UIViewController {
-    
-    func didTapImageView(_ imageView: ExpandableImageView) {
-        TransitionManager.shared.setup(imageView: imageView)
-        
-        let imageViewerViewController = ImageViewerViewController(image: imageView.image!)
-        imageViewerViewController.view.backgroundColor = .black
-        imageViewerViewController.transitioningDelegate = TransitionManager.shared
-        imageViewerViewController.modalPresentationStyle = .custom
-        present(imageViewerViewController, animated: true, completion: nil)
-    }
-    
-}
-
 class ExpandableImageView: UIImageView {
 
     weak var delegate: ExpandableImageViewDelegate?
