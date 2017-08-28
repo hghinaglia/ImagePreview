@@ -27,15 +27,8 @@ class ViewController: UIViewController {
 extension ViewController: ExpandableImageViewDelegate {
     
     func didTapImageView(_ imageView: ExpandableImageView) {
-        guard let image = imageView.image else { return }
-        
-        TransitionManager.shared.setup(imageView: imageView)
-        
-        let imageViewerViewController = ImageViewerViewController(image: image)
-        imageViewerViewController.view.backgroundColor = .black
-        imageViewerViewController.transitioningDelegate = TransitionManager.shared
-        imageViewerViewController.modalPresentationStyle = .custom
-        present(imageViewerViewController, animated: true, completion: nil)
+        TransitionManager.shared.presenter = self
+        TransitionManager.shared.performTransition(with: imageView)
     }
     
 }

@@ -22,22 +22,32 @@ class TransitionManager: NSObject {
     fileprivate var fromImageView: UIImageView!
     fileprivate var duplicatedImageView: UIImageView!
     var toImageView: UIImageView?
+    var presenter: UIViewController?
     
-    func setup(imageView: UIImageView) {
+    func performTransition(with imageView: UIImageView) {
+        guard let image = imageView.image else { return }
+        guard let presenter = presenter else { return }
+        
+        // Source image view
         fromImageView = imageView
         
         // Absolute rect base on screen
-        absoluteRect = imageView.convert(
-            imageView.bounds,
-            to: UIApplication.shared.keyWindow!.rootViewController!.view!)
+        absoluteRect = imageView.convert(imageView.bounds, to: presenter.view)
         
         // Copy Image View
-        duplicatedImageView = UIImageView(image: fromImageView.image!)
+        duplicatedImageView = UIImageView(image: image)
         duplicatedImageView.frame = absoluteRect
         duplicatedImageView.contentMode = fromImageView.contentMode
         duplicatedImageView.layer.masksToBounds = fromImageView.layer.masksToBounds
         duplicatedImageView.layer.cornerRadius = fromImageView.layer.cornerRadius
         duplicatedImageView.clipsToBounds = fromImageView.clipsToBounds
+        
+        // Prepare image viewer view controller
+        let imageViewerViewController = ImageViewerViewController(image: image)
+        imageViewerViewController.view.backgroundColor = .black
+        imageViewerViewController.transitioningDelegate = self
+        imageViewerViewController.modalPresentationStyle = .custom
+        presenter.present(imageViewerViewController, animated: true, completion: nil)
     }
     
 }
