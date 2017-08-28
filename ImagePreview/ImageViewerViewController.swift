@@ -91,7 +91,9 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Actions
     
     func close() {
-        TransitionManager.shared.toImageView = imageView
+        if let transitionManager = transitioningDelegate as? TransitionManager {
+            transitionManager.detailImageView = imageView            
+        }
         dismiss(animated: true, completion: nil)
     }
     

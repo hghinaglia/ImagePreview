@@ -9,12 +9,12 @@
 import UIKit
 
 protocol ExpandableImageViewDelegate: class {
-    func didTapImageView(_ imageView: ExpandableImageView)
+    func didTap(imageView: ExpandableImageView)
 }
 
 extension ExpandableImageViewDelegate where Self: UIViewController {
     
-    func didTapImageView(_ imageView: ExpandableImageView) {
+    func didTap(imageView: ExpandableImageView) {
         TransitionManager.shared.performTransition(with: imageView, presenter: self)
     }
     
@@ -43,7 +43,7 @@ class ExpandableImageView: UIImageView {
     // MARK: - Actions
     
     func tap(_ sender: UIGestureRecognizer) {
-        delegate?.didTapImageView(self)
+        delegate?.didTap(imageView: self)
     }
     
 }
