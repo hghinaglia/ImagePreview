@@ -10,7 +10,7 @@ import UIKit
 
 class CollectionCell: UICollectionViewCell {
     
-    @IBOutlet weak var iconImageView: ExpandableImageView!
+    @IBOutlet weak var iconImageView: TappableImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

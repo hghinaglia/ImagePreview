@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img4" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img4" translatesAutoresizingMaskIntoConstraints="NO" id="uqO-Jr-V2W" customClass="TappableImageView" customModule="ImagePreview" customModuleProvider="target">
                                 <rect key="frame" x="112.5" y="41.5" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="uqO-Jr-V2W" secondAttribute="height" multiplier="1:1" id="cez-SV-pI2"/>
@@ -35,7 +35,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-xt-nde" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img2" translatesAutoresizingMaskIntoConstraints="NO" id="W0U-xt-nde" customClass="TappableImageView" customModule="ImagePreview" customModuleProvider="target">
                                 <rect key="frame" x="112" y="225" width="150" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="W0U-xt-nde" secondAttribute="height" multiplier="1:1" id="p9O-rA-xJT"/>
@@ -47,7 +47,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="BX8-P9-SMU" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img1" translatesAutoresizingMaskIntoConstraints="NO" id="BX8-P9-SMU" customClass="TappableImageView" customModule="ImagePreview" customModuleProvider="target">
                                 <rect key="frame" x="-0.5" y="408" width="375" height="185"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="BX8-P9-SMU" secondAttribute="height" multiplier="75:37" id="Oc9-QZ-oMs"/>
@@ -107,7 +107,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dxv-bd-ecv" customClass="ExpandableImageView" customModule="ImagePreview" customModuleProvider="target">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dxv-bd-ecv" customClass="TappableImageView" customModule="ImagePreview" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                 </imageView>
                                             </subviews>
@@ -150,6 +150,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="9Bi-Mz-MEE" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="v2R-iy-fnD">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>

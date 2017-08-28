@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewController: UIViewController, ExpandableImageViewDelegate {
+class CollectionViewController: UIViewController, TappableImageViewDelegate {
 
     let images: [UIImage] = [#imageLiteral(resourceName: "img1"), #imageLiteral(resourceName: "img2"), #imageLiteral(resourceName: "img3"), #imageLiteral(resourceName: "img4")]
     

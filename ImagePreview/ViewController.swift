@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, ExpandableImageViewDelegate {
+class ViewController: UIViewController, TappableImageViewDelegate {
 
-    @IBOutlet weak var imageView1: ExpandableImageView!
-    @IBOutlet weak var imageView2: ExpandableImageView!
-    @IBOutlet weak var imageView3: ExpandableImageView!
+    @IBOutlet weak var imageView1: TappableImageView!
+    @IBOutlet weak var imageView2: TappableImageView!
+    @IBOutlet weak var imageView3: TappableImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

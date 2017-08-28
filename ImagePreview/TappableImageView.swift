@@ -1,5 +1,5 @@
 //
-//  ExpandableImageView.swift
+//  TappableImageView.swift
 //  ImagePreview
 //
 //  Created by Hector Ghinaglia on 8/24/17.
@@ -8,21 +8,21 @@
 
 import UIKit
 
-protocol ExpandableImageViewDelegate: class {
-    func didTap(imageView: ExpandableImageView)
+protocol TappableImageViewDelegate: class {
+    func didTap(imageView: TappableImageView)
 }
 
-extension ExpandableImageViewDelegate where Self: UIViewController {
+extension TappableImageViewDelegate where Self: UIViewController {
     
-    func didTap(imageView: ExpandableImageView) {
+    func didTap(imageView: TappableImageView) {
         TransitionManager.shared.performTransition(with: imageView, presenter: self)
     }
     
 }
 
-class ExpandableImageView: UIImageView {
+class TappableImageView: UIImageView {
 
-    weak var delegate: ExpandableImageViewDelegate?
+    weak var delegate: TappableImageViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
