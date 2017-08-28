@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE0C57E01F549FAF00711BA9 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0C57DF1F549FAF00711BA9 /* CollectionCell.swift */; };
+		DE0C57E21F549FF600711BA9 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0C57E11F549FF600711BA9 /* CollectionViewController.swift */; };
 		DE914F191F50C2E8008D8372 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE914F181F50C2E8008D8372 /* ImageViewExtension.swift */; };
 		DEC9255C1F4F3E5300F21EEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9255B1F4F3E5300F21EEC /* AppDelegate.swift */; };
 		DEC9255E1F4F3E5300F21EEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC9255D1F4F3E5300F21EEC /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE0C57DF1F549FAF00711BA9 /* CollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		DE0C57E11F549FF600711BA9 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		DE914F181F50C2E8008D8372 /* ImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
 		DEC925581F4F3E5300F21EEC /* ImagePreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImagePreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC9255B1F4F3E5300F21EEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +68,8 @@
 			children = (
 				DEC9255B1F4F3E5300F21EEC /* AppDelegate.swift */,
 				DEC9255F1F4F3E5300F21EEC /* Main.storyboard */,
+				DE0C57E11F549FF600711BA9 /* CollectionViewController.swift */,
+				DE0C57DF1F549FAF00711BA9 /* CollectionCell.swift */,
 				DEC925621F4F3E5300F21EEC /* Assets.xcassets */,
 				DEC925641F4F3E5300F21EEC /* LaunchScreen.storyboard */,
 				DEC925671F4F3E5300F21EEC /* Info.plist */,
@@ -153,6 +159,8 @@
 				DEC9256E1F4F3FFD00F21EEC /* ExpandableImageView.swift in Sources */,
 				DEC9255E1F4F3E5300F21EEC /* ViewController.swift in Sources */,
 				DEC9255C1F4F3E5300F21EEC /* AppDelegate.swift in Sources */,
+				DE0C57E21F549FF600711BA9 /* CollectionViewController.swift in Sources */,
+				DE0C57E01F549FAF00711BA9 /* CollectionCell.swift in Sources */,
 				DE914F191F50C2E8008D8372 /* ImageViewExtension.swift in Sources */,
 				DED169161F4F80010022BEE1 /* ImageViewerViewController.swift in Sources */,
 			);
