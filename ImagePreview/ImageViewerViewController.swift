@@ -9,7 +9,7 @@
 import UIKit
 
 class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
-
+    
     private weak var imageView: UIImageView!
     private weak var scrollView: UIScrollView!
     private weak var closeButton: UIButton!
@@ -56,20 +56,34 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         
         let closeButton = UIButton(type: .system)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.setTitle("Close", for: .normal)
-        closeButton.setTitleColor(.white, for: .normal)
         closeButton.addTarget(self, action: #selector(close), for: .touchUpInside)
+        closeButton.tintColor = .lightGray
         view.addSubview(closeButton)
         self.closeButton = closeButton
         
         prepareConstraints()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.imageView.alpha = 1.0
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
+        let size = CGSize(width: closeButton.frame.height * 0.4, height: closeButton.frame.height * 0.4)
+        var closeButtonIcon: UIImage?
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        UIGraphicsGetCurrentContext()
+        drawLine(from: .zero, to: CGPoint(x: size.width, y: size.height), lineWidth: 1.0)
+        drawLine(from: CGPoint(x: size.width, y: 0), to: CGPoint(x: 0, y: size.height), lineWidth: 1.0)
+        closeButtonIcon = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        closeButton.setImage(closeButtonIcon, for: .normal)
+    }
+    
     // MARK: - Layouts
     
     fileprivate func prepareConstraints() {
@@ -83,16 +97,28 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
         let scrollViewVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: views)
         view.addConstraints(scrollViewHorizontalConstraints + scrollViewVerticalConstraints)
         
-        let closeButtonHorizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:[closeButton]-|", options: [], metrics: nil, views: views)
-        let closeButtonVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(20)-[closeButton]", options: [], metrics: nil, views: views)
+        let closeButtonHorizontalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "H:[closeButton(width)]|", options: [], metrics: ["width": 50.0], views: views)
+        let closeButtonVerticalConstraints = NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-15-[closeButton(height)]", options: [], metrics: ["height": 50.0], views: views)
         view.addConstraints(closeButtonHorizontalConstraints + closeButtonVerticalConstraints)
+    }
+    
+    // MARK: - Bezier
+    
+    private func drawLine(from: CGPoint, to: CGPoint, lineWidth: CGFloat) {
+        let line = UIBezierPath()
+        line.lineWidth = lineWidth
+        line.move(to: from)
+        line.addLine(to: to)
+        line.stroke()
     }
     
     // MARK: - Actions
     
     func close() {
         if let transitionManager = transitioningDelegate as? TransitionManager {
-            transitionManager.detailImageView = imageView            
+            transitionManager.detailImageView = imageView
         }
         dismiss(animated: true, completion: nil)
     }
@@ -180,5 +206,5 @@ class ImageViewerViewController: UIViewController, UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
-
+    
 }
